@@ -1,0 +1,13 @@
+{
+  "name": "sheil-ai",
+  "version": "0.0.0",
+  "description": "a modular ai cli that unifies multiple model providers with built-in rag, embeddings, and pluggable tools.",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.ts"
+  },
+  "keywords": ["ai", "cli", "rag", "embeddings", "tools"],
+  "author": "muzammil_07",
+  "license": "MIT"
+}
