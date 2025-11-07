@@ -9,3 +9,12 @@ node_modules/
 
 # scratchpad
 .scratchpad/
+
+# incident logs
+incidents/
+
+# session files
+sessions/
+
+# usage data
+usage/
