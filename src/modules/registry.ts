@@ -45,18 +45,19 @@ services.register('ai:deepseek', AIService, providers.ollama.languageModel('deep
 services.register('ai:tiger-gemma', AIService, providers.ollama.languageModel('tiger-gemma-v3'));
 services.register('ai:phi4-mini', AIService, providers.ollama.languageModel('phi4-mini'));
 
-services.register('ai:glm', AIService, providers.openrouter.languageModel('z-ai/glm-4.5-air:free'));
+services.register('ai:glm', AIService, providers.openrouter.languageModel('z-ai/glm-4.5-air'));
 services.register('ai:gpt-oss', AIService, providers.openrouter.languageModel('openai/gpt-oss-120b:free'));
-services.register('ai:grok', AIService, providers.openrouter.languageModel('x-ai/grok-4-fast:free'));
-services.register('ai:kimi-k2', AIService, providers.openrouter.languageModel('moonshotai/kimi-k2:free'));
-services.register('ai:qwen3-coder', AIService, providers.openrouter.languageModel('qwen/qwen3-coder:free'));
+services.register('ai:grok', AIService, providers.openrouter.languageModel('x-ai/grok-4-fast'));
+services.register('ai:kimi-k2', AIService, providers.openrouter.languageModel('moonshotai/kimi-k2'));
+services.register('ai:qwen3-coder', AIService, providers.openrouter.languageModel('qwen/qwen3-coder'));
 
 // ? does not do 1024 dimensions
 services.register('embedding:gemini-001', EmbeddingService, providers.google.textEmbeddingModel('gemini-embedding-001'));
-// ? does not do 1024 dimensions
-services.register('embedding:nomic', EmbeddingService, providers.openai.textEmbeddingModel('nomic-embed-text'));
+services.register('embedding:nomic', EmbeddingService, providers.ollama.textEmbeddingModel('nomic-embed-text'));
+
+// ? does 1024 dimensions
 services.register('embedding:mxbai-large', EmbeddingService, providers.ollama.textEmbeddingModel('mxbai-embed-large'));
-services.register('embedding:snowflake', EmbeddingService, providers.ollama.textEmbeddingModel('snowflake-arctic-embed2:latest'));
+services.register('embedding:snowflake', EmbeddingService, providers.ollama.textEmbeddingModel('snowflake-arctic-embed2'));
 
 services.register('database', Database, { ...config.database });
 services.register('object-store', ObjectStore, { ...config.s3 });
