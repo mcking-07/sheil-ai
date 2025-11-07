@@ -1,0 +1,43 @@
+---
+services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    container_name: sheil-ai-database
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - network
+
+  migrations:
+    image: flyway/flyway:latest-alpine
+    container_name: sheil-ai-migrations
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      FLYWAY_USER: ${POSTGRES_USER}
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - migrations:/flyway/sql
+    command: ['migrate']
+    depends_on:
+      - postgres
+    networks:
+      - network
+
+volumes:
+  postgres_data:
+  migrations:
+    driver: local
+    driver_opts:
+      type: bind
+      device: ./src/database/migrations
+      o: bind
+
+networks:
+  network:
+    driver: bridge
