@@ -1,4 +1,5 @@
 import process from 'node:process';
+import { description, name, version } from '../../package.json' assert { type: 'json' };
 import type { MCPConfigType } from '../types';
 import 'dotenv/config';
 
@@ -8,9 +9,9 @@ const system_prompts = {
 
 const config = {
   application: {
-    name: 'sheil-ai',
-    description: 'a modular ai cli that unifies multiple model providers with built-in rag, embeddings, and pluggable tools.',
-    version: '0.0.0',
+    name,
+    description,
+    version,
     commands: {
       chat: {
         name: 'chat',
