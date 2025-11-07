@@ -1,13 +1,59 @@
 {
   "name": "sheil-ai",
   "version": "0.0.0",
-  "description": "a modular ai cli that unifies multiple model providers with built-in rag, embeddings, and pluggable tools.",
+  "description": "a modular ai cli that unifies multiple model providers with built-in rag, embeddings, pluggable tools, and mcp support.",
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "node src/index.ts"
+    "start": "tsx src/index.ts",
+    "chat": "tsx src/index.ts chat",
+    "list": "tsx src/index.ts list-models",
+    "search": "tsx src/index.ts search",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "db:start": "docker-compose up -d",
+    "db:stop": "docker-compose down --rmi local -v",
+    "db:migrate": "docker-compose up migrations",
+    "ingest:remote": "tsx src/scripts/scrape-parse-ingest.ts"
   },
-  "keywords": ["ai", "cli", "rag", "embeddings", "tools"],
+  "bin": {
+    "sheil-ai": "./src/index.ts"
+  },
+  "keywords": [
+    "ai",
+    "cli",
+    "rag",
+    "embeddings",
+    "tools",
+    "mcp"
+  ],
   "author": "muzammil_07",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@ai-sdk/anthropic": "2.0.9",
+    "@ai-sdk/google": "2.0.11",
+    "@ai-sdk/openai": "2.0.23",
+    "@ai-sdk/openai-compatible": "1.0.13",
+    "@aws-sdk/client-s3": "3.879.0",
+    "@modelcontextprotocol/sdk": "1.17.5",
+    "ai": "5.0.25",
+    "chalk": "5.6.0",
+    "cheerio": "1.1.2",
+    "commander": "14.0.0",
+    "dotenv": "17.2.1",
+    "google-sr": "6.0.0",
+    "mathjs": "14.6.0",
+    "node-fetch": "3.3.2",
+    "pg": "8.16.3",
+    "zod": "4.0.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "5.2.2",
+    "@types/node": "24.3.0",
+    "@types/pg": "8.15.5",
+    "eslint-flat-config-utils": "2.1.1",
+    "jiti": "2.6.1",
+    "tsx": "4.20.5",
+    "typescript": "5.9.2"
+  }
 }
