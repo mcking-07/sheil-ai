@@ -1,5 +1,5 @@
 import process from 'node:process';
-import { description, name, version } from '../../package.json' assert { type: 'json' };
+import { description, name, version } from '../../package.json';
 import type { MCPConfigType } from '../types';
 import 'dotenv/config';
 
