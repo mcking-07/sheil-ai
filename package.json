@@ -1,6 +1,6 @@
 {
   "name": "sheil-ai",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "a modular ai cli that unifies multiple model providers with built-in rag, embeddings, pluggable tools, and mcp support.",
   "main": "src/index.ts",
   "type": "module",
