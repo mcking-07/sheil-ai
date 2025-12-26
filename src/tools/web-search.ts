@@ -5,6 +5,9 @@ import fetch from 'node-fetch';
 import { z } from 'zod';
 import type { Element } from 'domhandler';
 
+// ? deprecation notice: `google-sr` was permanently deprecated on december 20, 2025.
+// ? see https://github.com/typicalninja/google-sr/issues/103.
+
 const is_content_valid = (content: string) => content.length > 20 && !/^[\s\d\W]+$/.test(content) && !/cookie|privacy|terms|advertisement|subscribe|login|sign[- ]?up|read more/i.test(content);
 
 const is_search_result_valid = ({ title, type, link, isAd }: Partial<OrganicResultNode>) => type === 'ORGANIC' && !isAd && link !== null && !!title;

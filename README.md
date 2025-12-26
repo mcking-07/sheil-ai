@@ -119,6 +119,14 @@ npm run chat -- --model <my-model-identifier>
 - **uuid_tool**: uuid generation
 - **mcp_tools (extendable)**: mcp server tools (context7, exa, filesystem)
 
+### web_search_tool (deprecated)
+
+the `web_search_tool` uses `google-sr` which was **[permanently deprecated](https://github.com/typicalninja/google-sr/issues/103) on december 20, 2025**.
+
+- **reason:** google has blocked non-javascript requests and is taking legal action against scraping services.
+- **status:** the tool will continue to work for now but may stop functioning at any time.
+- **recommendation:** use the **exa mcp tool** (`web_search_exa`) via the configured mcp server.
+
 ### parameters
 
 | flag                          | description                     | default            |
