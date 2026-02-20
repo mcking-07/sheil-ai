@@ -75,7 +75,7 @@ class ChatService {
   }
 
   private async generate_title(message: string) {
-    const ai_service = services.find<AIService>('ai:gemini-2.5-flash');
+    const ai_service = services.find<AIService>('ai:flash');
 
     const response = await ai_service.generate_text({
       system: config.prompts.generate_title,
@@ -141,7 +141,7 @@ class ChatService {
     this.id = this.id.trim() || await this.generate_title(input);
     this.messages.push({ role: 'user', parts: [{ type: 'text', text: input }] });
 
-    const response = this.ai_service.stream_text({
+    const response = await this.ai_service.stream_text({
       system: config?.prompts?.system,
       messages: this.messages,
       options: { ...this.provider_options },

@@ -17,7 +17,7 @@ const config = {
         name: 'chat',
         description: 'start an interactive chat session with sheil-ai',
         options: [
-          { flags: '-m, --model <string>', description: 'the ai model to use', action: undefined, default: 'gemini-2.5-flash' },
+          { flags: '-m, --model <string>', description: 'the ai model to use', action: undefined, default: 'flash' },
           { flags: '-s, --session <string>', description: 'load an existing chat session', action: undefined },
           { flags: '--max-tokens <number>', description: 'set the maximum number of tokens for the response', action: parseInt },
           { flags: '--temperature <number>', description: 'set the temperature for the response', action: parseFloat, default: 0.5 },
@@ -82,7 +82,7 @@ const config = {
   scripts: {
     ingest: {
       remote: process.env.KNOWLEDGE_BASE_URL,
-      model: 'gemini-2.5-flash',
+      model: 'flash',
     },
   },
   mcp: {

@@ -23,7 +23,7 @@ class UsageTracker {
 
     const tokens = {
       ...('tokens' in usage ? { total: usage.tokens } : {
-        input: usage?.inputTokens, output: usage?.outputTokens, total: usage?.totalTokens, reasoning: usage?.reasoningTokens, cached: usage?.cachedInputTokens,
+        input: usage?.inputTokens, output: usage?.outputTokens, total: usage?.totalTokens, reasoning: usage?.outputTokenDetails?.reasoningTokens, cached: usage?.inputTokenDetails?.cacheReadTokens,
       }),
     };
 

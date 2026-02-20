@@ -1,6 +1,6 @@
 # sheil-ai
 
-[![ai-sdk](https://img.shields.io/badge/ai_sdk-v5-black.svg)](https://sdk.vercel.ai)
+[![ai-sdk](https://img.shields.io/badge/ai_sdk-v6-black.svg)](https://sdk.vercel.ai)
 [![anthropic](https://img.shields.io/badge/anthropic-claude-d97757.svg)](https://anthropic.com)
 [![google](https://img.shields.io/badge/google-gemini-4796E3.svg)](https://gemini.google.com)
 [![openai](https://img.shields.io/badge/openai-gpt-100000.svg)](https://openai.com)
@@ -59,7 +59,7 @@ docker-compose up
 npm run chat
 
 # with specific model
-npm run chat -- --model claude-4
+npm run chat -- --model opus-4.6
 
 # load existing session
 npm run chat -- --session my-session
@@ -77,11 +77,11 @@ npm run chat -- --temperature 0.7 --max-tokens 1000 --reasoning-effort high
 
 **language models:**
 
-- `claude-3.5`, `claude-4` (anthropic)
-- `gemini-2.5-pro`, `gemini-2.5-flash` (google)
-- `gpt-4o-mini`, `gpt-5-mini` (openai)
-- `phi4-mini`, `qwen3-deepseek` (ollama)
-- `kimi-k2`, `qwen3-coder`, `gpt-oss` (openrouter)
+- `claude-haiku-4.5`, `claude-opus-4.6` (anthropic)
+- `gemini-3-pro`, `gemini-3-flash` (google)
+- `gpt-5.3-codex`, `gpt-5.1-codex-mini` (openai)
+- `qwen3-mini`, `deepseek`, `tiger-gemma`, `phi4-mini` (ollama)
+- `minimax-m2.5`, `grok-4.1-fast`, `kimi-k2.5`, `gpt-oss-120b` (openrouter)
 
 **embedding models:**
 
@@ -96,14 +96,14 @@ models can be extended by registering new ones in the service registry:
 // register a new language model
 services.register('ai:<my-model-identifier>', AIService, providers.<provider>.languageModel('model-name'));
 
-// example (openai gpt 5 nano)
-services.register('ai:gpt-5-small', AIService, providers.openai.languageModel('gpt-5-nano'));
+// example (openai gpt 5.1 mini)
+services.register('ai:gpt-5.1-mini', AIService, providers.openai.languageModel('gpt-5.1-codex-mini'));
 
 // register a new embedding model
-services.register('embedding:<my-embedding-identifier>', EmbeddingService, providers.<provider>.textEmbeddingModel('embedding-model-name'));
+services.register('embedding:<my-embedding-identifier>', EmbeddingService, providers.<provider>.embeddingModel('embedding-model-name'));
 
 // example (openai text embedding 3 small)
-services.register('embedding:openai-small', EmbeddingService, providers.openai.textEmbeddingModel('text-embedding-3-small'));
+services.register('embedding:openai-small', EmbeddingService, providers.openai.embeddingModel('text-embedding-3-small'));
 
 // use it in chat (only language models)
 npm run chat -- --model <my-model-identifier>
@@ -129,20 +129,20 @@ the `web_search_tool` uses `google-sr` which was **[permanently deprecated](http
 
 ### parameters
 
-| flag                          | description                     | default            |
-| ----------------------------- | ------------------------------- | ------------------ |
-| `--model`                     | ai model to use                 | `gemini-2.5-flash` |
-| `--temperature`               | response creativity (0.0-2.0)   | `0.5`              |
-| `--max-tokens`                | response length limit           | -                  |
-| `--top-p`                     | nucleus sampling parameter      | `0.9`              |
-| `--top-k`                     | top-k sampling parameter        | `50`               |
-| `--frequency-penalty`         | frequency penalty               | `0`                |
-| `--presence-penalty`          | presence penalty                | `0`                |
-| `--seed`                      | random seed for reproducibility | -                  |
-| `--no-reasoning`              | disable model reasoning         | `false`            |
-| `--reasoning-effort`          | low/medium/high                 | `medium`           |
-| `--thinking-budget`           | token budget for reasoning      | -                  |
-| `--disable-parallel-tool-use` | disable parallel tool execution | `false`            |
+| flag                          | description                     | default  |
+| ----------------------------- | ------------------------------- | -------- |
+| `--model`                     | ai model to use                 | `flash`  |
+| `--temperature`               | response creativity (0.0-2.0)   | `0.5`    |
+| `--max-tokens`                | response length limit           | -        |
+| `--top-p`                     | nucleus sampling parameter      | `0.9`    |
+| `--top-k`                     | top-k sampling parameter        | `50`     |
+| `--frequency-penalty`         | frequency penalty               | `0`      |
+| `--presence-penalty`          | presence penalty                | `0`      |
+| `--seed`                      | random seed for reproducibility | -        |
+| `--no-reasoning`              | disable model reasoning         | `false`  |
+| `--reasoning-effort`          | low/medium/high                 | `medium` |
+| `--thinking-budget`           | token budget for reasoning      | -        |
+| `--disable-parallel-tool-use` | disable parallel tool execution | `false`  |
 
 ## mcp support
 
@@ -231,11 +231,11 @@ the application uses a service registry pattern for dependency management:
 
 ```typescript
 // register services
-services.register('ai:claude-4', AIService, providers.anthropic.languageModel('claude-sonnet-4'));
+services.register('ai:opus-4.6', AIService, providers.anthropic.languageModel('claude-opus-4-6'));
 services.register('vector-store', VectorStore, Database, EmbeddingService);
 
 // use services
-const ai_service = services.find<AIService>('ai:claude-4');
+const ai_service = services.find<AIService>('ai:opus-4.6');
 ```
 
 ### vector store

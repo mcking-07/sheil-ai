@@ -31,7 +31,7 @@ const init_chat_command = () => {
   const command = program.command(name, { isDefault: true }).description(description);
   options.forEach((option: CommandOptionType) => append_options(command, option));
 
-  command.action(async ({ model = 'gemini-2.5-flash', session, ...options }: { model: string; session?: string } & ProviderOptionsType & ModelGenerationOptionsType) => {
+  command.action(async ({ model = 'flash', session, ...options }: { model: string; session?: string } & ProviderOptionsType & ModelGenerationOptionsType) => {
     const ai_service = services.find<AIService>(`ai:${model}`);
 
     const chat_service = new ChatService(ai_service, session, options);

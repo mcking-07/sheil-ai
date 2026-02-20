@@ -9,7 +9,7 @@ const { providers: provider_config } = config;
 
 const CHAT_PROVIDER_OPTIONS = {
   anthropic: {
-    sendReasoning: false, thinking: { type: 'disabled', budgetTokens: 1024 }, disableParallelToolUse: false,
+    sendReasoning: false, thinking: { type: 'disabled' }, disableParallelToolUse: false,
   } satisfies AnthropicProviderOptions,
   google: {
     thinkingConfig: { includeThoughts: false, thinkingBudget: 1024 },

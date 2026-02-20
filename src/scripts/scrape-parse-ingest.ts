@@ -1,4 +1,5 @@
 import process from 'node:process';
+import { Output } from 'ai';
 import { type CheerioAPI, load } from 'cheerio';
 import fetch from 'node-fetch';
 import { z } from 'zod';
@@ -73,15 +74,17 @@ const generate_content_pairs_schema = z.array(z.object({
   answer: z.string().describe('a concise, factual answer derived solely from the article content'),
 }).describe('a single question and answer pair')).min(10).describe('an array of question and answer pairs');
 
+const generate_content_pairs_output_schema = Output.object({ schema: generate_content_pairs_schema });
+
 const generate_content_pairs = async (article: KnowledgeBaseArticle) => {
   const ai_service = services.find<AIService>(`ai:${config?.scripts?.ingest?.model}`);
 
-  const { object: pairs } = await ai_service.generate_object({
+  const { output: pairs } = await ai_service.generate_object({
     messages: [{ role: 'user', parts: [{ type: 'text', text: `generate question-answer pairs for the following article [${article?.title}]: ${article?.content}` }] }],
-    system: config?.prompts?.generate_content_pairs, options: { reasoning: false }, params: { temperature: 0.3 }, schema: generate_content_pairs_schema,
+    system: config?.prompts?.generate_content_pairs, options: { reasoning: false }, params: { temperature: 0.3 }, output: generate_content_pairs_output_schema,
   });
 
-  return pairs;
+  return pairs as z.infer<typeof generate_content_pairs_schema>;
 };
 
 const ingest = async (article: KnowledgeBaseArticle) => {
@@ -104,7 +107,7 @@ const scrape_and_ingest = async (start_url: string) => {
   console.log(`\n[+] fetched [${categories.length}] categories from [${start_url}]`);
 
   const articles = categories.flatMap(({ articles }) => articles).filter(({ content }) => content?.trim()?.length);
-  console.log(`\n[+] parsed [${articles.length}] articles within [${categories.length}] categories from [${start_url}]\n`);
+  console.log(`[+] parsed [${articles.length}] articles within [${categories.length}] categories from [${start_url}]`);
 
   for await (const article of articles) {
     await ingest(article);

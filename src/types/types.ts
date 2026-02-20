@@ -1,6 +1,5 @@
 import type { S3ClientConfig } from '@aws-sdk/client-s3';
-import type { TextStreamPart, Tool, UIMessage } from 'ai';
-import type { ZodType } from 'zod';
+import type { Output, TextStreamPart, Tool, UIMessage } from 'ai';
 import type { providers } from '../modules';
 
 type ProviderType = keyof typeof providers;
@@ -35,9 +34,7 @@ interface AIGenerateParams {
 }
 
 interface AIObjectGenerateParams extends AIGenerateParams {
-  enums?: string[];
-  output?: 'enum' | 'array' | 'object' | 'no-schema';
-  schema?: ZodType;
+  output?: ReturnType<typeof Output.text> | ReturnType<typeof Output.object> | ReturnType<typeof Output.array> | ReturnType<typeof Output.choice> | ReturnType<typeof Output.json>;
 };
 
 type AIResponseStreamPartType = TextStreamPart<Record<string, Tool>>;

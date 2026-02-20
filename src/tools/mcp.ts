@@ -1,6 +1,6 @@
+import { createMCPClient } from '@ai-sdk/mcp';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
-import { experimental_createMCPClient } from 'ai';
 import { config } from '../config';
 import type { MCPServerConfigType } from '../types';
 
@@ -19,7 +19,7 @@ const transports = Object.entries(config?.mcp || {}).map(([name, params]) => ({
 }));
 
 const promises = transports.map(async ({ name, transport }) => {
-  const client = await experimental_createMCPClient({ name, transport });
+  const client = await createMCPClient({ name, transport });
   return await client.tools();
 });
 

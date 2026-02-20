@@ -1,4 +1,4 @@
-import { convertToModelMessages, generateObject, generateText, hasToolCall, type LanguageModel, smoothStream, stepCountIs, streamText } from 'ai';
+import { convertToModelMessages, generateText, hasToolCall, type LanguageModel, smoothStream, stepCountIs, streamText } from 'ai';
 import { provider_options_for, services } from '../modules';
 import type { AIGenerateParams, AIObjectGenerateParams, ProviderType } from '../types';
 import type { UsageTracker } from './usage';
@@ -20,7 +20,7 @@ class AIService {
     const response = await generateText({
       model: this.model,
       system,
-      messages: convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages),
       ...(tools && { tools }),
       stopWhen: [stepCountIs(50), hasToolCall('final_response')],
       ...(options && { providerOptions: { [this.provider]: provider_options_for[this.provider](options) } }),
@@ -35,11 +35,11 @@ class AIService {
     return response;
   }
 
-  stream_text({ messages, system, tools, options, params }: AIGenerateParams) {
+  async stream_text({ messages, system, tools, options, params }: AIGenerateParams) {
     const response = streamText({
       model: this.model,
       system,
-      messages: convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages),
       ...(tools && { tools }),
       stopWhen: [stepCountIs(50), hasToolCall('final_response')],
       ...(options && { providerOptions: { [this.provider]: provider_options_for[this.provider](options) } }),
@@ -59,17 +59,15 @@ class AIService {
     return response;
   }
 
-  async generate_object({ messages, system, tools, options, params, output, enums, schema }: AIObjectGenerateParams) {
-    const response = await generateObject({
+  async generate_object({ messages, system, tools, options, params, output }: AIObjectGenerateParams) {
+    const response = await generateText({
       model: this.model,
       system,
-      messages: convertToModelMessages(messages),
+      messages: await convertToModelMessages(messages),
       ...(tools && { tools }),
       ...(options && { providerOptions: { [this.provider]: provider_options_for[this.provider](options) } }),
       ...params,
       ...(output && { output }),
-      ...(enums && output === 'enum' && { enum: enums }),
-      ...(schema && { schema }),
     });
     this.usage_tracker.track(this.model_id, 'generate_object', response?.usage);
     return response;
