@@ -15,7 +15,7 @@
         "@ai-sdk/openai-compatible": "1.0.13",
         "@aws-sdk/client-s3": "3.879.0",
         "@modelcontextprotocol/sdk": "1.26.0",
-        "ai": "5.0.25",
+        "ai": "5.0.52",
         "chalk": "5.6.0",
         "cheerio": "1.1.2",
         "commander": "14.0.0",
@@ -56,13 +56,30 @@
       }
     },
     "node_modules/@ai-sdk/gateway": {
-      "version": "1.0.14",
-      "resolved": "https://registry.npmjs.org/@ai-sdk/gateway/-/gateway-1.0.14.tgz",
-      "integrity": "sha512-qD5yn7JsQp6hP85YD3LPv6h4Obef0NZnGah/8KT0kMCgkwBhFNKWgXLbsn04K26RkgEqAc7G0Q61pC6ZtjeF6Q==",
+      "version": "1.0.29",
+      "resolved": "https://registry.npmjs.org/@ai-sdk/gateway/-/gateway-1.0.29.tgz",
+      "integrity": "sha512-o9LtmBiG2WAgs3GAmL79F8idan/UupxHG8Tyr2gP4aUSOzflM0bsvfzozBp8x6WatQnOx+Pio7YNw45Y6I16iw==",
       "license": "Apache-2.0",
       "dependencies": {
         "@ai-sdk/provider": "2.0.0",
-        "@ai-sdk/provider-utils": "3.0.7"
+        "@ai-sdk/provider-utils": "3.0.9"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "peerDependencies": {
+        "zod": "^3.25.76 || ^4"
+      }
+    },
+    "node_modules/@ai-sdk/gateway/node_modules/@ai-sdk/provider-utils": {
+      "version": "3.0.9",
+      "resolved": "https://registry.npmjs.org/@ai-sdk/provider-utils/-/provider-utils-3.0.9.tgz",
+      "integrity": "sha512-Pm571x5efqaI4hf9yW4KsVlDBDme8++UepZRnq+kqVBWWjgvGhQlzU8glaFq0YJEB9kkxZHbRRyVeHoV2sRYaQ==",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@ai-sdk/provider": "2.0.0",
+        "@standard-schema/spec": "^1.0.0",
+        "eventsource-parser": "^3.0.5"
       },
       "engines": {
         "node": ">=18"
@@ -3390,15 +3407,32 @@
       }
     },
     "node_modules/ai": {
-      "version": "5.0.25",
-      "resolved": "https://registry.npmjs.org/ai/-/ai-5.0.25.tgz",
-      "integrity": "sha512-c7WeAeGnWk+aKUCMgUal2Qa7POcC1/75SrrYHPhlYLWE+DJ2G0gde5TftwCEMwG+pQ6BhaTQHIAQoBR2GGNyAw==",
+      "version": "5.0.52",
+      "resolved": "https://registry.npmjs.org/ai/-/ai-5.0.52.tgz",
+      "integrity": "sha512-GLlRHjMlvN9+w7UYGxCpUQ8GgCRv5Z+JCprRH3Q8YbXJ/JyIc6EP9+YRUmQsyExX/qQsuehe7y/LLygarbSTOw==",
       "license": "Apache-2.0",
       "dependencies": {
-        "@ai-sdk/gateway": "1.0.14",
+        "@ai-sdk/gateway": "1.0.29",
         "@ai-sdk/provider": "2.0.0",
-        "@ai-sdk/provider-utils": "3.0.7",
+        "@ai-sdk/provider-utils": "3.0.9",
         "@opentelemetry/api": "1.9.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "peerDependencies": {
+        "zod": "^3.25.76 || ^4"
+      }
+    },
+    "node_modules/ai/node_modules/@ai-sdk/provider-utils": {
+      "version": "3.0.9",
+      "resolved": "https://registry.npmjs.org/@ai-sdk/provider-utils/-/provider-utils-3.0.9.tgz",
+      "integrity": "sha512-Pm571x5efqaI4hf9yW4KsVlDBDme8++UepZRnq+kqVBWWjgvGhQlzU8glaFq0YJEB9kkxZHbRRyVeHoV2sRYaQ==",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@ai-sdk/provider": "2.0.0",
+        "@standard-schema/spec": "^1.0.0",
+        "eventsource-parser": "^3.0.5"
       },
       "engines": {
         "node": ">=18"
