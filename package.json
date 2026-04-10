@@ -43,7 +43,7 @@
     "commander": "14.0.0",
     "dotenv": "17.2.1",
     "google-sr": "6.0.0",
-    "mathjs": "14.6.0",
+    "mathjs": "15.2.0",
     "node-fetch": "3.3.2",
     "pg": "8.16.3",
     "zod": "4.3.6"
